@@ -6,7 +6,8 @@ require_relative "compares_unicodey_strings"
 require_relative "compares_csvs"
 require_relative "diff_generator"
 
-class CLI
+module TranslationTools
+  class CLI
   def initialize
     @options = {}
   end
