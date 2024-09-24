@@ -1,39 +1,67 @@
-# TranslationTools
+# CSV Comparison Tool
 
-TODO: Delete this and the text below, and describe your gem
+This command-line tool allows you to compare two CSV files or two strings, with support for Unicode characters and various output formats.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/translation_tools`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Features
+
+- Compare two strings for equality, considering Unicode characters
+- Compare two CSV files, focusing on specific columns
+- Output differences in various formats: plain text, CSV, colored diff, or HTML
+- Flexible identifier column specification for CSV comparisons
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-```
-
-If bundler is not being used to manage dependencies, install the gem by executing:
+1. Ensure you have Ruby installed on your system.
+2. Clone this repository or download the source code.
+3. Install the required gems:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle install
 ```
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+ruby main.rb [options] <string1> <string2> OR <csv1_path> <csv2_path>
+```
 
-## Development
+### Options
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+- `-v`, `--verbose`: Run verbosely
+- `-c`, `--csv`: Compare CSVs (required for CSV comparison)
+- `-i`, `--identifier COLUMN[S]`: Identifier column(s) for CSV comparison (format: column or csv1_col:csv2_col)
+- `-m`, `--compare COLUMNS`: Columns to compare in CSV (format: csv1_col:csv2_col or just col for same name)
+- `--format FORMAT`: Output format (CSV, DIFF, or HTML)
+- `-h`, `--help`: Show help message
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### Examples
 
-## Contributing
+1. Compare two strings:
+   ```
+   ruby main.rb "Hello, world!" "Hello, World!"
+   ```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/pingortle/translation_tools.
+2. Compare two CSV files:
+   ```
+   ruby main.rb -c -i ID -m Name:FullName,Age --format DIFF file1.csv file2.csv
+   ```
 
-## License
+3. Compare CSVs with different column names and output as HTML:
+   ```
+   ruby main.rb -c -i ID1:ID2 -m "First Name":"Full Name",Age --format HTML file1.csv file2.csv
+   ```
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+## Output
+
+- For string comparisons: Displays whether the strings are equal or not.
+- For CSV comparisons:
+  - Plain text: Lists all differences found.
+  - CSV: Outputs a new CSV file with differences.
+  - DIFF: Shows colored diff output in the terminal.
+  - HTML: Generates an HTML file with colorized diffs.
+
+The tool will also indicate in which file(s) each identifier is present (csv1, csv2, both, or none).
+
+## Exit Code
+
+The program exits with the number of differences found (0 if no differences).
