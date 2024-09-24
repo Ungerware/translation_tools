@@ -10,15 +10,15 @@ Gem::Specification.new do |spec|
 
   spec.summary = "A set of tools for managing and processing translations in Ruby projects."
   spec.description = "TranslationTools provides utilities for working with translation files, including CSV processing, diff generation, and more. It aims to simplify the management of multilingual content in Ruby applications."
-  spec.homepage = "https://github.com/kaleblape/translation_tools"
+  spec.homepage = "https://github.com/Ungerware/translation_tools"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/kaleblape/translation_tools"
-  spec.metadata["changelog_uri"] = "https://github.com/kaleblape/translation_tools/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/Ungerware/translation_tools"
+  spec.metadata["changelog_uri"] = "https://github.com/Ungerware/translation_tools/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
