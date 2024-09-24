@@ -1,6 +1,7 @@
 require "csv"
 
-class ComparesCSVs
+module TranslationTools
+  class ComparesCSVs
   def self.compare(csv1, csv2, identifier_columns, columns_to_compare, comparison_class = DefaultComparer)
     Result.new.tap do |result|
       csv1_data = CSV.parse(csv1, headers: true)
@@ -106,5 +107,6 @@ class ComparesCSVs
     def self.equal?(str1, str2)
       str1 == str2
     end
+  end
   end
 end
