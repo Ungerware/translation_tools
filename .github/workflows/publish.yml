@@ -1,0 +1,30 @@
+name: Publish Gem
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+      - name: Set Credentials
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:github: Bearer ${GITHUB_TOKEN}\n" > $HOME/.gem/credentials
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Build and Publish
+        run: |
+          gem build *.gemspec
+          gem push --KEY github --host https://rubygems.pkg.github.com/${GITHUB_REPOSITORY_OWNER} *.gem
