@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+require "translation_tools"
+
+version = TranslationTools::VERSION
+
+puts "Releasing version #{version}..."
+
+# Fail if there are uncommitted changes
+fail "Uncommitted changes detected. Please commit or stash them before releasing." if `git status --porcelain`.strip.length > 0
+
+system("git tag v#{version}")
+system("git push --tags")
+
+puts "Done!"
