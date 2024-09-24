@@ -36,8 +36,6 @@ Gem::Specification.new do |spec|
   # Dependencies
   spec.add_dependency "csv", "~> 3.3"
   spec.add_dependency "diffy", "~> 3.4"
-  spec.add_dependency "i18n", "~> 1.8"
-  spec.add_dependency "thor", "~> 1.2"
 
   # Development dependencies
   spec.add_development_dependency "rspec", "~> 3.10"
